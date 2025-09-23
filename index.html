@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Magnetometer Dashboard (Vanilla)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1 class="title">Magnetometer Dashboard</h1>
+        <span class="badge">Vanilla build</span>
+      </header>
+
+      <div id="banner-root" class="banner-host" role="status"></div>
+
+      <div class="main">
+        <aside class="sidebar">
+          <section class="sidebar-section" data-component="connection-panel">
+            <div class="statusRow">
+              <span class="statusLabel">연결 상태</span>
+              <span class="statusValue" data-bind="status">연결 안 됨</span>
+            </div>
+
+            <div class="buttons">
+              <button class="button" type="button" data-action="connect">디바이스 연결</button>
+              <button class="button secondary" type="button" data-action="disconnect" disabled>
+                연결 해제
+              </button>
+            </div>
+
+            <div class="meta">
+              <span>마지막 업데이트: <span data-bind="last-updated">—</span></span>
+              <span>경과 시간: <span data-bind="relative-time">—</span></span>
+            </div>
+
+            <div class="error" data-bind="error" hidden></div>
+
+            <p class="devHelp" data-bind="helper">
+              Web Bluetooth 지원 브라우저에서 실행해 주세요. `?mock=1` 쿼리로 Mock 데이터를 확인할 수 있습니다.
+            </p>
+          </section>
+
+          <section class="sidebar-section axis" data-component="axis-selector">
+            <span class="title">표시할 축 선택</span>
+            <div class="options" role="group" aria-label="표시할 축">
+              <label class="option" data-axis="strength" data-active="true">
+                <input type="checkbox" value="strength" checked /> Strength
+              </label>
+              <label class="option" data-axis="x" data-active="false">
+                <input type="checkbox" value="x" /> X 축
+              </label>
+              <label class="option" data-axis="y" data-active="false">
+                <input type="checkbox" value="y" /> Y 축
+              </label>
+              <label class="option" data-axis="z" data-active="false">
+                <input type="checkbox" value="z" /> Z 축
+              </label>
+            </div>
+            <span class="helper">기본값은 Strength이며 최소 하나 이상 선택해야 합니다.</span>
+          </section>
+        </aside>
+
+        <section class="content">
+          <section class="card stats" data-component="live-stats">
+            <div class="stats-grid">
+              <div class="stat-card" data-field="strength">
+                <span class="label">Strength</span>
+                <span class="value" data-role="value">—</span>
+                <span class="unit">µT</span>
+              </div>
+              <div class="stat-card" data-field="x">
+                <span class="label">X 축</span>
+                <span class="value" data-role="value">—</span>
+                <span class="unit">µT</span>
+              </div>
+              <div class="stat-card" data-field="y">
+                <span class="label">Y 축</span>
+                <span class="value" data-role="value">—</span>
+                <span class="unit">µT</span>
+              </div>
+              <div class="stat-card" data-field="z">
+                <span class="label">Z 축</span>
+                <span class="value" data-role="value">—</span>
+                <span class="unit">µT</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="card chart" data-component="magnet-chart">
+            <div class="chart-header">
+              <span class="title">실시간 자기장 추이</span>
+              <span class="subtitle" data-bind="axes">표시 축: Strength</span>
+            </div>
+            <div class="canvasWrapper">
+              <canvas aria-label="자기장 라인 차트"></canvas>
+              <p class="empty" data-bind="empty">데이터를 수신하면 그래프가 표시됩니다.</p>
+            </div>
+          </section>
+        </section>
+      </div>
+
+      <section class="log" data-component="data-log">
+        <div class="header">
+          <span class="title">최근 측정 로그</span>
+          <button class="button" type="button" data-action="download" disabled>CSV 다운로드</button>
+        </div>
+        <div class="tableWrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">시각</th>
+                <th scope="col">X</th>
+                <th scope="col">Y</th>
+                <th scope="col">Z</th>
+                <th scope="col">Strength</th>
+              </tr>
+            </thead>
+            <tbody data-bind="rows">
+              <tr>
+                <td colspan="5">데이터를 수신하면 로그가 표시됩니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="vendor/chart.umd.js"></script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

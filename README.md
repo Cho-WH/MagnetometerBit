@@ -1,7 +1,7 @@
 # MagnetBit – Web Magnetometer Dashboard
-> 이 프로젝트는 자바실험실(https://javalab.org)에서 영감을 받았습니다. 
+> 이 프로젝트는 자바실험실 (https://javalab.org) 에서 영감을 받았습니다. 
 
-바로 사용 URL: https://cho-wh.github.io/MagnetBit/
+바로 사용 URL: https://cho-wh.github.io/MagnetometerBit/
 
 micro:bit에서 보내는 자기장 값을 실시간으로 보여주는 웹 대시보드입니다. Web Bluetooth 기반이므로 지원하는 모든 브라우저(Chrome, Edge, 삼성브라우저 등)에서 동작하며, HTTPS 환경이 필수입니다.
 

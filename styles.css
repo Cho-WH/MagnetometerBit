@@ -242,9 +242,8 @@ button {
 .supported-dialog {
   display: none;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
   z-index: 1000;
   border: 1px solid rgba(148, 163, 184, 0.4);
   border-radius: 0.75rem;
@@ -252,6 +251,7 @@ button {
   background: rgba(15, 23, 42, 0.95);
   color: #e2e8f0;
   width: min(420px, 90vw);
+  max-height: 90vh;
 }
 
 .supported-dialog[open],

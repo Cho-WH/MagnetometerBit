@@ -30,9 +30,16 @@ export const initConnectionPanel = () => {
   const disconnectBtn = root.querySelector('[data-action="disconnect"]')
   const helperEl = root.querySelector('[data-bind="helper"]')
   const supportedButton = root.querySelector('[data-action="show-supported"]')
-  const supportedDialog = document.getElementById('supported-browsers-dialog')
+  const supportedDialogEl = document.getElementById('supported-browsers-dialog')
 
-  if (supportedButton && supportedDialog instanceof HTMLDialogElement) {
+  if (supportedDialogEl && window.dialogPolyfill && typeof window.dialogPolyfill.registerDialog === 'function') {
+    window.dialogPolyfill.registerDialog(supportedDialogEl)
+  }
+
+  const supportedDialog =
+    supportedDialogEl && typeof supportedDialogEl.showModal === 'function' ? supportedDialogEl : null
+
+  if (supportedButton && supportedDialog) {
     supportedButton.addEventListener('click', () => {
       if (!supportedDialog.open) {
         supportedDialog.showModal()

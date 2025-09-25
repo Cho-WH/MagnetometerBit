@@ -38,7 +38,8 @@
             <div class="error" data-bind="error" hidden></div>
 
             <p class="devHelp" data-bind="helper">
-              Web Bluetooth 지원 브라우저에서 실행해 주세요. `?mock=1` 쿼리로 Mock 데이터를 확인할 수 있습니다.
+              연결이 안되는 경우, <button type="button" class="devHelp-link" data-action="show-supported">지원 브라우저</button>를 확인해주세요.<br />
+              micro:bit의 A 또는 B 버튼을 누른 상태로 연결하면 초기 자기장 보정을 건너뛰고 바로 측정이 시작됩니다.
             </p>
           </section>
 
@@ -126,6 +127,20 @@
         </div>
       </section>
     </div>
+
+    <dialog id="supported-browsers-dialog" class="supported-dialog">
+      <form method="dialog" class="supported-dialog__content">
+        <h2>지원 브라우저 안내</h2>
+        <p>운영체제별 대표적인 Web Bluetooth 지원 브라우저는 다음과 같습니다.</p>
+        <ul>
+          <li><strong>Windows / macOS</strong>: Chrome, Microsoft Edge</li>
+          <li><strong>Chromebook</strong>: Chrome (최신 버전)</li>
+          <li><strong>Android</strong>: Chrome, 삼성 인터넷 브라우저</li>
+        </ul>
+        <p>iOS/iPadOS는 Safari 기반 브라우저에서 Web Bluetooth를 지원하지 않습니다. 필요 시 전용 앱(예: Bluefy)을 이용하세요.</p>
+        <button type="submit" class="button small">닫기</button>
+      </form>
+    </dialog>
 
     <script src="vendor/chart.umd.js"></script>
     <script type="module" src="js/app.js"></script>

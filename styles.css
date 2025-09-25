@@ -179,6 +179,26 @@ button {
 .devHelp {
   font-size: 0.8rem;
   color: rgba(148, 163, 184, 0.7);
+  line-height: 1.4;
+}
+
+.devHelp-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #60a5fa;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.devHelp-link:focus {
+  outline: 2px solid rgba(96, 165, 250, 0.7);
+  outline-offset: 2px;
+}
+
+.devHelp-link:hover {
+  color: #93c5fd;
 }
 
 .axis .title {
@@ -217,6 +237,51 @@ button {
 .helper {
   font-size: 0.8rem;
   color: rgba(148, 163, 184, 0.8);
+}
+
+.supported-dialog {
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 0.75rem;
+  padding: 0;
+  background: rgba(15, 23, 42, 0.95);
+  color: #e2e8f0;
+  width: min(420px, 90vw);
+}
+
+.supported-dialog::backdrop {
+  background: rgba(2, 6, 23, 0.75);
+}
+
+.supported-dialog__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+}
+
+.supported-dialog__content h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.supported-dialog__content ul {
+  margin: 0 0 0.25rem 1.25rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.supported-dialog__content li {
+  list-style: disc;
+}
+
+.button.small {
+  align-self: flex-end;
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.9rem;
 }
 
 .content {

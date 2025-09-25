@@ -29,6 +29,24 @@ export const initConnectionPanel = () => {
   const connectBtn = root.querySelector('[data-action="connect"]')
   const disconnectBtn = root.querySelector('[data-action="disconnect"]')
   const helperEl = root.querySelector('[data-bind="helper"]')
+  const supportedButton = root.querySelector('[data-action="show-supported"]')
+  const supportedDialog = document.getElementById('supported-browsers-dialog')
+
+  if (supportedButton && supportedDialog instanceof HTMLDialogElement) {
+    supportedButton.addEventListener('click', () => {
+      if (!supportedDialog.open) {
+        supportedDialog.showModal()
+      }
+    })
+    supportedDialog.addEventListener('click', (event) => {
+      if (event.target === supportedDialog) {
+        supportedDialog.close()
+      }
+    })
+    supportedDialog.addEventListener('close', () => {
+      supportedButton.focus()
+    })
+  }
 
   let isBusy = false
   let manualDisconnect = false

@@ -5,6 +5,7 @@ import { initMagnetChart } from './ui/magnet-chart.js'
 import { initDataLog } from './ui/data-log.js'
 import { initBanner } from './ui/banner.js'
 import { initMockTelemetry } from './mockTelemetry.js'
+import { initUsageGuide } from './ui/usage-guide.js'
 
 const cleanupTasks = []
 const registerCleanup = (fn) => {
@@ -18,6 +19,8 @@ const boot = () => {
   const mockEnabled = ['1', 'true', 'yes'].includes((params.get('mock') || '').toLowerCase())
 
   initBanner({ mockEnabled })
+
+  registerCleanup(initUsageGuide())
 
   registerCleanup(initConnectionPanel())
   registerCleanup(initAxisSelector())

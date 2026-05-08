@@ -39,6 +39,16 @@ const removeGattListener = () => {
   }
 }
 
+const addGattListener = (targetDevice) => {
+  if (!targetDevice) return
+  try {
+    targetDevice.removeEventListener('gattserverdisconnected', handleGattDisconnection)
+    targetDevice.addEventListener('gattserverdisconnected', handleGattDisconnection)
+  } catch (error) {
+    // ignore
+  }
+}
+
 const emitDisconnected = () => {
   if (typeof disconnectListener === 'function') {
     disconnectListener()
@@ -91,7 +101,7 @@ export const requestDevice = async () => {
     optionalServices: [UART_SERVICE_UUID],
   })
 
-  requested.addEventListener('gattserverdisconnected', handleGattDisconnection)
+  addGattListener(requested)
   device = requested
   return requested
 }
@@ -99,6 +109,7 @@ export const requestDevice = async () => {
 export const connect = async (selectedDevice) => {
   assertBluetoothAvailability()
   device = selectedDevice
+  addGattListener(device)
 
   const server = await device.gatt?.connect()
   if (!server) {

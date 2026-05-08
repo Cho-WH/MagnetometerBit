@@ -12,6 +12,8 @@ const INITIAL_STATE = {
   samplingIntervalMs: 100,
   lastUpdatedAt: undefined,
   errorMessage: undefined,
+  noticeMessage: undefined,
+  noticeTone: 'info',
 }
 
 let currentState = { ...INITIAL_STATE }
@@ -34,10 +36,12 @@ const reducer = (state, action) => {
     case 'setSample':
       return {
         ...state,
+        connectionStatus: state.connectionStatus === 'waiting-data' ? 'connected' : state.connectionStatus,
         latestSample: action.sample,
         history: appendSample(state.history, action.sample),
         lastUpdatedAt: action.sample.timestamp,
         errorMessage: undefined,
+        noticeMessage: undefined,
       }
     case 'setAxes': {
       if (!Array.isArray(action.axes) || action.axes.length === 0) {
@@ -47,6 +51,8 @@ const reducer = (state, action) => {
     }
     case 'setError':
       return { ...state, errorMessage: action.message }
+    case 'setNotice':
+      return { ...state, noticeMessage: action.message, noticeTone: action.tone || 'info' }
     case 'reset':
       return {
         ...INITIAL_STATE,
@@ -100,5 +106,6 @@ export const actions = {
   setSample: (sample) => ({ type: 'setSample', sample }),
   setAxes: (axes) => ({ type: 'setAxes', axes }),
   setError: (message) => ({ type: 'setError', message }),
+  setNotice: (message, tone = 'info') => ({ type: 'setNotice', message, tone }),
   reset: () => ({ type: 'reset' }),
 }
